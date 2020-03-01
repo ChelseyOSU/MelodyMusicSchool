@@ -1,0 +1,187 @@
+.about-ours-paragraph{
+  font-size: 5px;
+  color: darkblue;
+  margin-top: 100px;
+  font-family: 'San Francisco', cursive;
+  padding-top: -20px;
+  background-image: url("https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+  opacity: 0.8;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  background-size: 100% 1000px;
+  display:-webkit-flex;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-align-items:center;
+      -ms-flex-align:center;
+          align-items:center;
+  -webkit-justify-content:center;
+      -ms-flex-pack:center;
+          justify-content:center;
+}
+
+p {
+  color:white;
+  font-size:0.3em;
+  font-weight:bold;
+  font-family: 'San Francisco', cursive;
+  opacity: 0.7;
+
+}
+
+/* ============3d start========== */
+.title-chinese{
+  font-size: 12px;
+  margin-top: 100px;
+  /* height: 300px; */
+  display:-webkit-flex;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-align-items:center;
+      -ms-flex-align:center;
+          align-items:center;
+  -webkit-justify-content:center;
+      -ms-flex-pack:center;
+          justify-content:center;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    background-size: 100% 1000px;
+  padding-top: -20px;
+  background-image: url("https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+  opacity: 0.8;
+}
+
+ p{
+  color:white;
+  font-size:1em;
+  font-weight:bold;
+  font-family: 'San Francisco', cursive;
+  opacity: 0.7;
+}
+p span {
+  display:inline-block;
+  position:relative;
+  -webkit-transform-style:preserve-3d;
+          transform-style:preserve-3d;
+  -webkit-perspective:500;
+          perspective:500;
+  -webkit-font-smoothing:antialiased;
+}
+p span::before,
+p span::after {
+  display:none;
+  position:absolute;
+  top:0;
+  /* left:-1px; */
+  -webkit-transform-origin:left top;
+      -ms-transform-origin:left top;
+          transform-origin:left top;
+  -webkit-transition:all ease-out 0.3s;
+          transition:all ease-out 0.3s;
+  content:attr(data-text);
+}
+p span::before {
+  z-index:1;
+  color:rgba(0,0,0,0.2);
+  -webkit-transform:scale(1.1, 1) skew(0deg, 20deg);
+      -ms-transform:scale(1.1, 1) skew(0deg, 20deg);
+          transform:scale(1.1, 1) skew(0deg, 20deg);
+}
+p span::after {
+  z-index:2;
+  color:black;
+  text-shadow:-1px 0 1px #684da3, 1px 0 1px rgba(0,0,0,0.8);
+  -webkit-transform:rotateY(-40deg);
+          transform:rotateY(-40deg);
+}
+p span:hover::before {
+  -webkit-transform:scale(1.1, 1) skew(0deg, 5deg);
+      -ms-transform:scale(1.1, 1) skew(0deg, 5deg);
+          transform:scale(1.1, 1) skew(0deg, 5deg);
+}
+p span:hover::after {
+  -webkit-transform:rotateY(-10deg);
+          transform:rotateY(-10deg);
+}
+@media (min-width:20em) {
+  p {
+    font-size:2em;
+  }
+  p span::before,
+  p span::after {
+    display:block;
+  }
+}
+@media (min-width:30em) {
+  p {
+    font-size:3em;
+  }
+}
+@media (min-width:40em) {
+  p {
+    font-size:5em;
+  }
+}
+@media (min-width:60em) {
+  p {
+    font-size:8em;
+  }
+}
+
+/* ==========3D function============== */
+.home-button{
+  font-family: 'San Francisco', cursive;
+  background-color: lightgrey;
+  color: black;
+  padding: 16px;
+  font-size: 40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.drop-title {
+  font-family: 'San Francisco', cursive;
+  background-color: lightgrey;
+  color: black;
+  padding: 16px;
+  font-size: 40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.about-ours{
+  font-family: 'San Francisco', cursive;
+  background-color: lightgrey;
+  color: black;
+  padding: 16px;
+  font-size: 40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/* 在鼠标移上去后显示下拉菜单 */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/* 当下拉内容显示后修改下拉按钮的背景颜色 */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+/* -------------drop down */
+.menu{
+  position: absolute;
+  top:0px;
+  left:20px;
+  margin:2px;
+}
+.home-button:hover{
+  cursor: pointer;
+}
+
+.about-ours{
+  cursor: pointer;
+}
