@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>chinese culture</title>
     <link rel="stylesheet" href="contents.css">
+
+    <link rel="stylesheet" href="./static/css/layui.css">
     <script src="TweenMax.min.js"> </script>
     <script src="contents.js" charset="utf-8" defer></script>
     <script src="search.js"> </script>
+
+    <script src="./static/js/layui.js"></script>
 </head>
 <body>
 
@@ -28,9 +32,8 @@
     <button class="delete" id="delete-post"> Delete Record </button>
 
   </div>
-<main>
 
-
+  <div class="top-part">
 
     <div class="post" data-type="BC">
       <div class="post-image-container">
@@ -55,22 +58,46 @@
 
             </div>
           </div>
-        </div></section>
+        </div>
+      </section>
    
-
+    </div>
 
 
 
     <main class="content">
-
-          <div id="filter-city" class="filter-input" name="filter-city">
-
+          <!-- <div id="filter-city" class="filter-input" name="filter-city">
           </div>
 
-        <div id="filter-update-button" ></div>
+        <div id="filter-update-button" ></div> -->
+
+        <table class="layui-table layui-form">
+          <thead>
+            <tr>
+              <th>医院</th>
+              <th>地址</th>
+              <th>设备</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr class="id36567">
+                  <td>36567</td>
+                  <td>15912345678</td>
+                  <td>02-21414124</td>
+                  <td>    
+                    <button type="button" class="layui-btn sou">开锁</button>
+                    <button type="button" class="layui-btn sou">重新识别</button>
+                    <button type="button" class="layui-btn sou">重启单元板 </button>
+                  </td>
+              </tr>
+              </tbody>
+        </table>
 
     </main>
-      <div class="button" id="sell-something-button"><i class="fa fa-plus"></i>
+
+
+      <div class="add-button" id="sell-something-button"><i class="fa fa-plus"></i>
 
         <p>add new</p>
       </div>

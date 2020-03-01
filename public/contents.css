@@ -1,6 +1,8 @@
 body {
   background-color: white;
-  margin:0px; }
+  margin:0px;
+  padding-bottom: 30px!important; 
+}
 
   .home-button{
     font-family: 'San Francisco', cursive;
@@ -179,10 +181,10 @@ body {
     padding-top: 100px; 
   }
 
-.button {
+.add-button {
   background: #968e8e;
   width: 180px;
-  padding: 5px 5px;
+  padding: 20px 5px;
 
   position: fixed;
   left: 90%;
@@ -200,7 +202,7 @@ body {
     user-select: none;
   }
 
-.button:hover {
+.add-button:hover {
     cursor: pointer;
   }
 
@@ -220,7 +222,7 @@ p:after {
 .action-button {
   font-size: 20px;
   color: white;
-  padding: 10px;
+  padding: 20px;
   background-color: #000;
   border: 1px solid #ababab;
   border-radius: 5px;
@@ -345,4 +347,21 @@ p:after {
 .delete:hover{
   color:red;
   cursor:pointer;
+}
+
+
+
+.top-part {
+  height: 600px;
+  /* background: blue; */
+}
+.content {
+  width: 70%;
+  height: 300px;
+  margin: 0 auto;
+  background: red;
+}
+
+.content th,td {
+  text-align: center!important;
 }

@@ -1,5 +1,5 @@
 //果冻按键
-var $button = document.querySelector('.button');
+var $button = document.querySelector('.add-button');
 $button.addEventListener('click', function() {
   var duration = 0.3,
       delay = 0.08;
@@ -14,7 +14,7 @@ document.getElementById('home').addEventListener('click', function(){
 
 
 //创建新文本。
-document.getElementById("filter-update-button").addEventListener("click", update);
+// document.getElementById("filter-update-button").addEventListener("click", update);
 document.getElementById("sell-something-button").addEventListener("click", modal_toggle);
 document.getElementById("modal-close").addEventListener("click", modal_toggle);
 document.getElementById("modal-cancel").addEventListener("click", modal_toggle);
