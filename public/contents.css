@@ -357,9 +357,7 @@ p:after {
 }
 .content {
   width: 70%;
-  height: 300px;
   margin: 0 auto;
-  background: red;
 }
 
 .content th,td {
