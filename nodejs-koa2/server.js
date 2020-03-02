@@ -9,7 +9,7 @@ const app = new Koa();
 app.use(bodyParser());
 
 //装载子路由
-router.use(require('./routers/grade-report.js').routes());
+app.use(require('./routers/grade-report.js').routes());
 
 app.listen(config.port, () => {
     console.log('The server is running at http://localhost:' + config.port);
