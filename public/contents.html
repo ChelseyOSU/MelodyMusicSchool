@@ -26,7 +26,7 @@
       getAllClasses();
     }
 
-    function test(){
+    function test() {
       alert(1)
     }
 
@@ -43,22 +43,22 @@
 
           data.forEach(item => {
             dom += "<tr>"
-                +"<td>"+item.first_name+"</td>"
-                +"<td>"+item.last_name+"</td>"
-                +"<td>"+item.class_name+"</td>"
-                +"<td>"+item.grade+"</td>"
-                +'<td><button type="button" class="layui-btn" onclick="test()">update</button><button type="button" class="layui-btn">delete</button></td>'
-                +"/<tr>";
+              + "<td>" + item.first_name + "</td>"
+              + "<td>" + item.last_name + "</td>"
+              + "<td>" + item.class_name + "</td>"
+              + "<td>" + item.grade + "</td>"
+              + '<td><button type="button" class="layui-btn" onclick="test()">update</button><button type="button" class="layui-btn">delete</button></td>'
+              + "/<tr>";
           });
 
-          if(classId == 101){
+          if (classId == 101) {
             $("#container").append($(dom));
-          }else if(classId == 228){
+          } else if (classId == 228) {
             $("#container2").append($(dom));
-          }else if(classId == 401){
+          } else if (classId == 401) {
             $("#container3").append($(dom));
           }
-       
+
 
         },
         error: function (data) {
@@ -66,23 +66,26 @@
       });
     }
 
-    function getAllClasses(){
+    var class_list = [];
+    function getAllClasses() {
       $.ajax({
         type: "GET",
         url: "http://localhost:8090/api/getAllClasses",
         success: function (data) {
           console.log(data)
+          class_list = data;
+
           var dom = "";
 
-          data.forEach((item,index) => {
-            if(index == 0){
-              dom += '<option value="'+item.id+'" selected="selected">'+ item.name
-                +"</option>";
-            }else{
-              dom += '<option value="'+item.id+'">'+ item.name
-                +"</option>";
+          data.forEach((item, index) => {
+            if (index == 0) {
+              dom += '<option value="' + item.id + '" selected="selected">' + item.name
+                + "</option>";
+            } else {
+              dom += '<option value="' + item.id + '">' + item.name
+                + "</option>";
             }
-         
+
           });
           $("#option").append($(dom));
         },
@@ -91,9 +94,77 @@
       });
     }
 
-    function modal_cancel(){
+    function modal_cancel() {
       $('#modal-backdrop').hide();
       $('#sell-something-modal').hide();
+    }
+
+    function modal_add() {
+      var firstName = $("#firstName").val();
+      var lastName = $("#lastName").val();
+      var classId = $("#option").val();
+      var grade = $("#grade").val();
+
+      if (firstName == "") {
+        alert("Please fill in Student FirstName")
+        return;
+      }
+
+      if (lastName == "") {
+        alert("Please fill in Student LastName")
+        return;
+      }
+
+      if (classId == "") {
+        alert("Please fill in Class")
+        return;
+      }
+
+      if (grade == "") {
+        alert("Please fill in grade")
+        return;
+      }
+
+      var className = "";
+      class_list.forEach(item =>{
+        if(classId == item.id){
+          className = item.name;
+        }
+      })
+
+      var grade_obj = {
+        firstName: firstName,
+        lastName: lastName,
+        grade: grade,
+        classId: classId,
+        className: className
+      }
+      add_grade(grade_obj);
+
+    }
+
+    function add_grade(grade_obj) {
+      console.log(grade_obj)
+      $.ajax({
+				type:"POST",
+				contenttype:"application/x-www-form-urlencoded",
+				url:"http://localhost:8090/item/create",
+				data:{
+					"title":title,
+					"description":description,
+					"imgUrl":imgUrl,
+					"price":price,
+					"stock":stock
+				
+				},
+				xhrFields:{withCredentials:true},
+				success:function(data){
+          
+				},
+				error:function(data){
+				}
+			});  
+
     }
 
   </script>
@@ -280,9 +351,9 @@
 
         <div class="post-input-element">
           <label for="post-time-input">Grade Record</label>
-          <input type="text" id="post-time-input">
+          <input type="text" id="grade">
         </div>
-        
+
       </div>
 
       <div class="modal-footer">
