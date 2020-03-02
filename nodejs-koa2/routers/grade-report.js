@@ -3,7 +3,8 @@ const router = require('koa-router')();
 
 
 //获取所有学生的成绩报告
-router.get('/api/gradeReport', controller.getGradeReport)
+router.get('/api/getGradeReport', controller.findAllGradeReport)
 
+router.get('/api/getGradeReportByClass', controller.findGradeReportByClass)
 
 module.exports = router;

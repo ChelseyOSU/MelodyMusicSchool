@@ -360,6 +360,11 @@ p:after {
   margin: 0 auto;
 }
 
+
+.content table{
+  margin-bottom: 30px;
+}
+
 .content th,td {
   text-align: center!important;
 }
