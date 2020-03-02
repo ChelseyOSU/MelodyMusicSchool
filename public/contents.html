@@ -29,6 +29,11 @@
     function edit(id) {
       $('#addStudent').hide();
       $('#editStudent').show();
+
+      $('#modal-add').hide();
+      $('#modal-edit').show();
+
+
       $('#modal-backdrop').show();
       $('#sell-something-modal').show();
 
@@ -426,7 +431,8 @@
 
       <div class="modal-footer">
         <button type="button" id="modal-cancel" class="modal-hide-button action-button" onclick="modal_cancel()">Cancel</button>
-        <button type="button" id="modal-accept" class="action-button" onclick="modal_add()">Add new students</button>
+        <button type="button" id="modal-add" class="action-button" onclick="modal_add()">Add new students</button>
+        <button type="button" id="modal-edit" class="action-button" onclick="modal_add()">Edit students</button>
       </div>
 
     </div>
