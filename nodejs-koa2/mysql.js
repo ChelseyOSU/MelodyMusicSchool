@@ -61,9 +61,9 @@ exports.findGradeReportByClass = (value) => {
 
 
 //查询所有班级
-exports.findAllClass = () => {
+exports.findAllClasses = () => {
   let sql = "select * from classes;"
-  return query(sql, value)
+  return query(sql)
 }
 
 

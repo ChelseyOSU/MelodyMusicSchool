@@ -375,3 +375,7 @@ p:after {
   font-size: 24px;
   color: #666;
 }
+
+.post-input-element {
+  margin-bottom: 20px;
+}
