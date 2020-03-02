@@ -9,4 +9,6 @@ router.get('/api/getGradeReportByClass', controller.findGradeReportByClass)
 
 router.post('/api/addGradeReport', controller.addGradeReport)
 
+router.post('/api/deleteOne', controller.deleteOne)
+
 module.exports = router;

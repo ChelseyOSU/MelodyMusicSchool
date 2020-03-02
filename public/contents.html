@@ -30,6 +30,26 @@
       alert(1)
     }
 
+    function deleteOne(id){
+      $.ajax({
+				type:"POST",
+				url:"http://localhost:8090/api/deleteOne",
+        data: {
+          id: id
+        },
+				success:function(data){
+          if(data.code == 200){
+            
+            getGradeReport(101);
+            getGradeReport(228);
+            getGradeReport(401);
+          }
+				},
+				error:function(data){
+				}
+			});  
+    }
+
     function getGradeReport(classId) {
       $.ajax({
         type: "GET",
@@ -47,7 +67,7 @@
               + "<td>" + item.last_name + "</td>"
               + "<td>" + item.class_name + "</td>"
               + "<td>" + item.grade + "</td>"
-              + '<td><button type="button" class="layui-btn" onclick="test()">update</button><button type="button" class="layui-btn" onclick="test()">delete</button></td>'
+              + '<td><button type="button" class="layui-btn" onclick="test()">update</button><button type="button" class="layui-btn" onclick="deleteOne('+item.id+')">delete</button></td>'
               + "/<tr>";
           });
 

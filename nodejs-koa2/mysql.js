@@ -84,3 +84,35 @@ exports.addEnrollment = (value) => {
   let sql = "insert into enrollments set student_id=?,class_id=?;"
   return query(sql, value)
 }
+
+
+
+//根据id查询grade
+exports.findGradeReportById =  ( id ) => {
+  let _sql = `select * from grade_report where id="${id}";`
+  return query( _sql)
+}
+
+// 删除学生
+exports.deleteStudent = (id) => {
+  let _sql = `delete from students where id = ${id}`
+  return query(_sql)
+}
+
+// 根据id删除名单
+// exports.deleteEnrollment = (id) => {
+//   let _sql = `delete from enrollments where id = ${id}`
+//   return query(_sql)
+// }
+
+// 根据student_id和class_id删除名单
+exports.deleteEnrollment = (student_id, class_id) => {
+  let _sql = `delete from enrollments where student_id = ${student_id} and class_id = ${class_id}`
+  return query(_sql)
+}
+
+// 删除成绩
+exports.deleteGradeReport = (id) => {
+  let _sql = `delete from grade_report where id = ${id}`
+  return query(_sql)
+}
