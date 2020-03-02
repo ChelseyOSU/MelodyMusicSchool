@@ -1,5 +1,6 @@
 const gradeReportModel = require('../mysql.js');
 const studentModel = require('../mysql.js');
+const enrollmentModel = require('../mysql.js');
 
 exports.findAllGradeReport = async ctx => {
     await gradeReportModel.findAllGradeReport()
@@ -28,6 +29,7 @@ exports.addGradeReport = async ctx => {
     // console.log(ctx.request.body)
     let grade_obj = ctx.request.body;
 
+    // 先添加学生
     let studuentId;
     await studentModel.addStudent([grade_obj.firstName, grade_obj.lastName,grade_obj.age])
     .then(result => {
@@ -38,6 +40,13 @@ exports.addGradeReport = async ctx => {
 
     console.log(studuentId)
     
+
+    //在添加名单
+    await enrollmentModel.addEnrollment([studuentId, grade_obj.classId])
+    .then(result => {
+    }).catch(() => {
+    })
+
 
     await gradeReportModel.addGradeReport([studuentId,grade_obj.firstName, grade_obj.lastName,grade_obj.classId, grade_obj.className, grade_obj.grade])
         .then(result => {

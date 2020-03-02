@@ -78,3 +78,9 @@ exports.addStudent = (value) => {
   let sql = "insert into students set first_name=?,last_name=?,age=?;"
   return query(sql, value)
 }
+
+//添加名单
+exports.addEnrollment = (value) => {
+  let sql = "insert into enrollments set student_id=?,class_id=?;"
+  return query(sql, value)
+}
