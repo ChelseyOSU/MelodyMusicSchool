@@ -105,3 +105,34 @@ exports.deleteOne = async (ctx) => {
         })
 
 }
+
+exports.findGradeReportById = async ctx => {
+    let id = ctx.request.query.id;
+
+    let grade_obj = {};
+    await gradeReportModel.findGradeReportById(id)
+        .then(result => {
+            grade_obj = result[0]
+        }).catch(() => {
+            ctx.body = 'error'
+        })
+
+    // 根据grade_obj.student_id查询学生的年纪
+    await gradeReportModel.findStudentById(grade_obj.student_id)
+        .then(result => {
+            let student = result[0]
+            console.log("&&&&&&&&&&&&&&&&&&&&&&")
+            console.log(student)
+            console.log("&&&&&&&&&&&&&&&&&&&&&&")
+
+            Object.assign(grade_obj, { age: student.age })
+
+            console.log("####################")
+            console.log(grade_obj)
+            console.log("####################")
+            ctx.body = grade_obj;
+        }).catch(() => {
+            ctx.body = 'error'
+        })
+
+}

@@ -93,6 +93,12 @@ exports.findGradeReportById =  ( id ) => {
   return query( _sql)
 }
 
+//根据id查询student
+exports.findStudentById =  ( id ) => {
+  let _sql = `select * from students where id="${id}";`
+  return query( _sql)
+}
+
 // 删除学生
 exports.deleteStudent = (id) => {
   let _sql = `delete from students where id = ${id}`

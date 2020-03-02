@@ -35,6 +35,8 @@ jQuery(document).ready(function () {
 
 
 function show_modal() {
+    $('#addStudent').show();
+    $('#editStudent').hide();
     $('#modal-backdrop').show();
     $('#sell-something-modal').show();
 }

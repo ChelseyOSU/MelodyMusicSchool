@@ -26,27 +26,54 @@
       getAllClasses();
     }
 
-    function test() {
-      alert(1)
+    function edit(id) {
+      $('#addStudent').hide();
+      $('#editStudent').show();
+      $('#modal-backdrop').show();
+      $('#sell-something-modal').show();
+
+      getGradeReportDetail(id);
     }
 
-    function deleteOne(id){
+    function getGradeReportDetail(id) {
       $.ajax({
-				type:"POST",
-				url:"http://localhost:8090/api/deleteOne",
+        type: "GET",
+        url: "http://localhost:8090/api/getGradeReportDetail",
+        data: {
+          "id": id
+        },
+        success: function (data) {
+          console.log(data)
+
+          $("#firstName").val(data.first_name);
+          $("#lastName").val(data.last_name);
+          $("#age").val(data.age);
+          $("#option").val(data.class_id);
+          $("#grade").val(data.grade);
+
+        },
+        error: function (data) {
+        }
+      });
+    }
+
+    function deleteOne(id) {
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:8090/api/deleteOne",
         data: {
           id: id
         },
-				success:function(data){
-          if(data.code == 200){
+        success: function (data) {
+          if (data.code == 200) {
             getGradeReport(101);
             getGradeReport(228);
             getGradeReport(401);
           }
-				},
-				error:function(data){
-				}
-			});  
+        },
+        error: function (data) {
+        }
+      });
     }
 
     function getGradeReport(classId) {
@@ -66,7 +93,7 @@
               + "<td>" + item.last_name + "</td>"
               + "<td>" + item.class_name + "</td>"
               + "<td>" + item.grade + "</td>"
-              + '<td><button type="button" class="layui-btn" onclick="test()">update</button><button type="button" class="layui-btn" onclick="deleteOne('+item.id+')">delete</button></td>'
+              + '<td><button type="button" class="layui-btn" onclick="edit(' + item.id + ')">update</button><button type="button" class="layui-btn" onclick="deleteOne(' + item.id + ')">delete</button></td>'
               + "/<tr>";
           });
 
@@ -138,7 +165,7 @@
         return;
       }
 
-       if (age == "") {
+      if (age == "") {
         alert("Please fill in Student Age")
         return;
       }
@@ -154,8 +181,8 @@
       }
 
       var className = "";
-      class_list.forEach(item =>{
-        if(classId == item.id){
+      class_list.forEach(item => {
+        if (classId == item.id) {
           className = item.name;
         }
       })
@@ -175,29 +202,30 @@
     function add_grade(grade_obj) {
       console.log(grade_obj)
       $.ajax({
-				type:"POST",
-				// contenttype:"application/x-www-form-urlencoded",
-				url:"http://localhost:8090/api/addGradeReport",
+        type: "POST",
+        // contenttype:"application/x-www-form-urlencoded",
+        url: "http://localhost:8090/api/addGradeReport",
         data: grade_obj,
         dataType: 'json',
-				success:function(data){
-          if(data.code == 200){
+        success: function (data) {
+          if (data.code == 200) {
             clearForm();
             $('#modal-backdrop').hide();
             $('#sell-something-modal').hide();
 
             getGradeReport(grade_obj.classId);
           }
-				},
-				error:function(data){
-				}
-			});  
+        },
+        error: function (data) {
+        }
+      });
 
     }
 
-    function clearForm(){
+    function clearForm() {
       $("#firstName").val("");
       $("#lastName").val("");
+      $("#age").val("");
       $("#grade").val("");
     }
 
@@ -351,7 +379,8 @@
     <div class="modal-dialog">
 
       <div class="modal-header">
-        <h3>Add New Students</h3>
+        <h3 id="addStudent">Add New Students</h3>
+        <h3 id="editStudent">Edit Students</h3>
         <button type="button" id="modal-close" class="modal-hide-button" onclick="modal_cancel()">&times;</button>
       </div>
 
