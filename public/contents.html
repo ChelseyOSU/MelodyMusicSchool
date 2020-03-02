@@ -47,7 +47,7 @@
               + "<td>" + item.last_name + "</td>"
               + "<td>" + item.class_name + "</td>"
               + "<td>" + item.grade + "</td>"
-              + '<td><button type="button" class="layui-btn" onclick="test()">update</button><button type="button" class="layui-btn">delete</button></td>'
+              + '<td><button type="button" class="layui-btn" onclick="test()">update</button><button type="button" class="layui-btn" onclick="test()">delete</button></td>'
               + "/<tr>";
           });
 
@@ -102,6 +102,7 @@
     function modal_add() {
       var firstName = $("#firstName").val();
       var lastName = $("#lastName").val();
+      var age = $("#age").val();
       var classId = $("#option").val();
       var grade = $("#grade").val();
 
@@ -112,6 +113,11 @@
 
       if (lastName == "") {
         alert("Please fill in Student LastName")
+        return;
+      }
+
+       if (age == "") {
+        alert("Please fill in Student Age")
         return;
       }
 
@@ -135,6 +141,7 @@
       var grade_obj = {
         firstName: firstName,
         lastName: lastName,
+        age: age,
         grade: grade,
         classId: classId,
         className: className
@@ -147,24 +154,29 @@
       console.log(grade_obj)
       $.ajax({
 				type:"POST",
-				contenttype:"application/x-www-form-urlencoded",
-				url:"http://localhost:8090/item/create",
-				data:{
-					"title":title,
-					"description":description,
-					"imgUrl":imgUrl,
-					"price":price,
-					"stock":stock
-				
-				},
-				xhrFields:{withCredentials:true},
+				// contenttype:"application/x-www-form-urlencoded",
+				url:"http://localhost:8090/api/addGradeReport",
+        data: grade_obj,
+        dataType: 'json',
 				success:function(data){
-          
+          if(data.code == 200){
+            clearForm();
+            $('#modal-backdrop').hide();
+            $('#sell-something-modal').hide();
+
+            getGradeReport(grade_obj.classId);
+          }
 				},
 				error:function(data){
 				}
 			});  
 
+    }
+
+    function clearForm(){
+      $("#firstName").val("");
+      $("#lastName").val("");
+      $("#grade").val("");
     }
 
   </script>
@@ -331,6 +343,11 @@
         <div class="post-input-element">
           <label for="post-text-input">Student LastName</label>
           <input type="text" id="lastName"></input>
+        </div>
+
+        <div class="post-input-element">
+          <label for="post-text-input">Student Age</label>
+          <input type="text" id="age"></input>
         </div>
 
         <!-- <div class="post-input-element">

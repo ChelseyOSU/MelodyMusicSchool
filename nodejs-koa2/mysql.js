@@ -68,7 +68,13 @@ exports.findAllClasses = () => {
 
 
 //添加成绩报告
-exports.addGradeReport = () => {
-  let sql = "insert into grade_report(first_name,last_name,class_id, class_name, grade) set first_name=?,last_name=?,class_id=?,class_name=?,grade=?;"
+exports.addGradeReport = (value) => {
+  let sql = "insert into grade_report set student_id=?,first_name=?,last_name=?,class_id=?,class_name=?,grade=?;"
+  return query(sql, value)
+}
+
+//添加学生
+exports.addStudent = (value) => {
+  let sql = "insert into students set first_name=?,last_name=?,age=?;"
   return query(sql, value)
 }
