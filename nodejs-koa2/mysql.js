@@ -122,3 +122,15 @@ exports.deleteGradeReport = (id) => {
   let _sql = `delete from grade_report where id = ${id}`
   return query(_sql)
 }
+
+
+
+exports.editGradeReport = (value) => {
+  let sql = "update grade_report set first_name=?,last_name=?,class_id=?,class_name=?,grade=? where id=?"
+  return query(sql, value)
+}
+
+exports.editStudent = (value) => {
+  let sql = "update students set first_name=?,last_name=?,age=? where id=?"
+  return query(sql, value)
+}

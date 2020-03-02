@@ -19,11 +19,15 @@
 
   <script>
     window.onload = function () {
+      initList()
+
+      getAllClasses();
+    }
+
+    function initList(){
       getGradeReport(101);
       getGradeReport(228);
       getGradeReport(401);
-
-      getAllClasses();
     }
 
     function edit(id) {
@@ -56,6 +60,9 @@
           $("#option").val(data.class_id);
           $("#grade").val(data.grade);
 
+          $("#gradeReportId").val(data.id);
+          $("#studentId").val(data.student_id);
+
         },
         error: function (data) {
         }
@@ -71,9 +78,7 @@
         },
         success: function (data) {
           if (data.code == 200) {
-            getGradeReport(101);
-            getGradeReport(228);
-            getGradeReport(401);
+            initList();
           }
         },
         error: function (data) {
@@ -149,11 +154,12 @@
     }
 
     function modal_cancel() {
+      clearForm();
       $('#modal-backdrop').hide();
       $('#sell-something-modal').hide();
     }
 
-    function modal_add() {
+    function modal_verify(val) {
       var firstName = $("#firstName").val();
       var lastName = $("#lastName").val();
       var age = $("#age").val();
@@ -200,7 +206,15 @@
         classId: classId,
         className: className
       }
-      add_grade(grade_obj);
+
+      if (val == 0) {
+        add_grade(grade_obj);
+      } else {
+        var gradeReportId = $("#gradeReportId").val();
+        var studentId = $("#studentId").val();
+        Object.assign(grade_obj, { gradeReportId: gradeReportId }, { studentId: studentId })
+        edit_grade(grade_obj);
+      }
 
     }
 
@@ -214,17 +228,40 @@
         dataType: 'json',
         success: function (data) {
           if (data.code == 200) {
-            clearForm();
-            $('#modal-backdrop').hide();
-            $('#sell-something-modal').hide();
-
-            getGradeReport(grade_obj.classId);
+            afterOpt(grade_obj);
           }
         },
         error: function (data) {
         }
       });
 
+    }
+
+    function edit_grade(grade_obj) {
+      console.log(grade_obj)
+      $.ajax({
+        type: "POST",
+        // contenttype:"application/x-www-form-urlencoded",
+        url: "http://localhost:8090/api/editGradeReport",
+        data: grade_obj,
+        dataType: 'json',
+        success: function (data) {
+          if (data.code == 200) {
+            afterOpt(grade_obj);
+          }
+        },
+        error: function (data) {
+        }
+      });
+
+    }
+
+    function afterOpt(grade_obj) {
+      clearForm();
+      $('#modal-backdrop').hide();
+      $('#sell-something-modal').hide();
+
+      initList();
     }
 
     function clearForm() {
@@ -309,28 +346,6 @@
           <th>Option</th>
         </tr>
       </thead>
-      <!-- <tbody>
-        <tr class="id36567">
-          <td>Fan</td>
-          <td>Jun</td>
-          <td>Popular Music Institute</td>
-          <td>80</td>
-          <td>
-            <button type="button" class="layui-btn">update</button>
-            <button type="button" class="layui-btn">delete</button>
-          </td>
-        </tr>
-        <tr class="id36567">
-          <td>Fan</td>
-          <td>Jun</td>
-          <td>Popular Music Institute</td>
-          <td>80</td>
-          <td>
-            <button type="button" class="layui-btn">update</button>
-            <button type="button" class="layui-btn">delete</button>
-          </td>
-        </tr>
-      </tbody> -->
 
       <tbody id="container">
 
@@ -391,6 +406,9 @@
 
       <div class="modal-body">
 
+        <input type="hidden" id="gradeReportId"></input>
+        <input type="hidden" id="studentId"></input>
+
         <div class="post-input-element">
           <label for="post-text-input">Student FirstName</label>
           <input type="text" id="firstName"></input>
@@ -431,8 +449,8 @@
 
       <div class="modal-footer">
         <button type="button" id="modal-cancel" class="modal-hide-button action-button" onclick="modal_cancel()">Cancel</button>
-        <button type="button" id="modal-add" class="action-button" onclick="modal_add()">Add new students</button>
-        <button type="button" id="modal-edit" class="action-button" onclick="modal_add()">Edit students</button>
+        <button type="button" id="modal-add" class="action-button" onclick="modal_verify(0)">Add new students</button>
+        <button type="button" id="modal-edit" class="action-button" onclick="modal_verify(1)">Edit students</button>
       </div>
 
     </div>

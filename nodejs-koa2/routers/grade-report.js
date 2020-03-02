@@ -13,4 +13,6 @@ router.post('/api/deleteOne', controller.deleteOne)
 
 router.get('/api/getGradeReportDetail', controller.findGradeReportById)
 
+router.post('/api/editGradeReport', controller.editGradeReport)
+
 module.exports = router;

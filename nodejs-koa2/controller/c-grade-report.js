@@ -60,6 +60,30 @@ exports.addGradeReport = async ctx => {
 }
 
 
+
+exports.editGradeReport = async ctx => {
+    // console.log(ctx.request.body)
+    let grade_obj = ctx.request.body;
+
+    // 修改学生
+    await studentModel.editStudent([grade_obj.firstName, grade_obj.lastName, grade_obj.age,grade_obj.studentId])
+        .then(result => {
+        }).catch(() => {
+        })
+
+    await gradeReportModel.editGradeReport([grade_obj.firstName, grade_obj.lastName, grade_obj.classId, grade_obj.className, grade_obj.grade,grade_obj.gradeReportId])
+        .then(result => {
+            ctx.body = {
+                code: 200,
+                message: 'ok'
+            }
+        }).catch(() => {
+            ctx.body = 'error'
+        })
+
+}
+
+
 exports.deleteOne = async (ctx) => {
     let id = ctx.request.body.id;
     console.log(id)
