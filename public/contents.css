@@ -363,3 +363,10 @@ p:after {
 .content th,td {
   text-align: center!important;
 }
+
+.theme {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  color: #666;
+}

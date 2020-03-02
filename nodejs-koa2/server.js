@@ -1,11 +1,10 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
-const Router = require('koa-router');
-const router = require('koa-router')
+var cors = require('koa2-cors');
 const config = require('./db.js');
 const app = new Koa();
 
-
+app.use(cors());
 app.use(bodyParser());
 
 //装载子路由

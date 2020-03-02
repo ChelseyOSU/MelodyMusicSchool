@@ -1,18 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <title>chinese culture</title>
-    <link rel="stylesheet" href="contents.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>chinese culture</title>
+  <link rel="stylesheet" href="contents.css">
 
-    <link rel="stylesheet" href="./static/css/layui.css">
-    <script src="TweenMax.min.js"> </script>
-    <script src="contents.js" charset="utf-8" defer></script>
-    <script src="search.js"> </script>
+  <link rel="stylesheet" href="./static/css/layui.css">
+  <script src="TweenMax.min.js"> </script>
+  <script src="contents.js" charset="utf-8" defer></script>
+  <script src="search.js"> </script>
 
-    <script src="./static/js/layui.js"></script>
+  <script src="./static/js/layui.js"></script>
+  <script src="./static/jquery-3.1.1.min.js"></script>
+
+  <script>
+    window.onload = function () {
+      getGradeReport();
+    }
+
+
+    function getParam(paramName) {
+      paramValue = "", isFound = !1;
+      if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+        while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+      }
+
+      return paramValue == "" && (paramValue = null), paramValue
+    }
+
+
+    function getGradeReport() {
+      $.ajax({
+        type: "GET",
+
+        url: "http://localhost:8090/api/gradeReport",
+        // xhrFields: { withCredentials: true },
+        // data: {
+        //   "id": getParam("id"),
+        // },
+        success: function (data) {
+          console.log(data)
+          var dom = "";
+
+          data.forEach(item => {
+            dom += "<tr>"
+                +"<td>"+item.first_name+"</td>"
+                +"<td>"+item.last_name+"</td>"
+                +"<td>"+item.class_name+"</td>"
+                +"<td>"+item.grade+"</td>"
+                +'<td><button type="button" class="layui-btn">update</button><button type="button" class="layui-btn">delete</button></td>'
+                +"/<tr>";
+          });
+       
+          $("#container").append($(dom));
+
+        },
+        error: function (data) {
+        }
+      });
+    }
+
+  </script>
 </head>
+
 <body>
 
 
@@ -21,7 +74,9 @@
 
 
     <div class="dropdown">
-      <button class="drop-title" id="drop-relics"><a href="javascript:search(0)">CLASS</a></button>
+      <button class="drop-title" id="drop-relics">
+        <a href="javascript:search(0)">CLASS</a>
+      </button>
       <div class="dropdown-content">
         <a href="javascript:search(1)">->GAITAR</a>
         <a href="javascript:search(2)">->PIANAO</a>
@@ -39,123 +94,131 @@
       <div class="post-image-container">
         <img src="https://i2.hdslb.com/bfs/archive/64dfc7f692fb613c0f1b800f7ae3c3015f541d28.jpg" alt="wenwu">
       </div>
-        <div class="post-info-container">
-            <h3 class="post-time-input">Osamuraisan (おさむらいさん)  </h3>
-            <p1 class="post-text-input">
-            Grade 98，Japanese Guitarist</p1>
-        </div>
+      <div class="post-info-container">
+        <h3 class="post-time-input">Osamuraisan (おさむらいさん) </h3>
+        <p1 class="post-text-input">
+          Grade 98，Japanese Guitarist</p1>
+      </div>
     </div>
-     <section id="posts" data-type="AC">
-      <div class="post" data-type="AC" >
-          <div class="post-contents">
-            <div class="post-image-container">
-              <img src="https://cdn.asiatatler.com/asiatatler/i/sg/2019/12/12175010-lang-lang-1_cover_2000x1387.jpg" alt="wenwu">
-            </div>
-            <div class="post-info-container">
-              <h3 class="post-time-input">Lang Lang (朗朗)</h3> 
-              <p1 class="post-text-input">
-              Grade 100，Chinese Pianist</p1> 
+    <section id="posts" data-type="AC">
+      <div class="post" data-type="AC">
+        <div class="post-contents">
+          <div class="post-image-container">
+            <img src="https://cdn.asiatatler.com/asiatatler/i/sg/2019/12/12175010-lang-lang-1_cover_2000x1387.jpg" alt="wenwu">
+          </div>
+          <div class="post-info-container">
+            <h3 class="post-time-input">Lang Lang (朗朗)</h3>
+            <p1 class="post-text-input">
+              Grade 100，Chinese Pianist</p1>
 
-            </div>
           </div>
         </div>
-      </section>
-   
-    </div>
+      </div>
+    </section>
+
+  </div>
 
 
 
-    <main class="content">
-          <!-- <div id="filter-city" class="filter-input" name="filter-city">
+  <main class="content">
+    <!-- <div id="filter-city" class="filter-input" name="filter-city">
           </div>
 
         <div id="filter-update-button" ></div> -->
 
-        <table class="layui-table layui-form">
-          <thead>
-            <tr>
-              <th>FirstName</th>
-              <th>LastName</th>
-              <th>Class</th>
-              <th>Grade</th>
-              <th>Option</th>
-            </tr>
-            </thead>
-            <tbody>
-              <tr class="id36567">
-                  <td>Fan</td>
-                  <td>Jun</td>
-                  <td>Popular Music Institute</td>
-                  <td>80</td>
-                  <td>    
-                    <button type="button" class="layui-btn">update</button>
-                    <button type="button" class="layui-btn">delete</button>
-                  </td>
-              </tr>
-              <tr class="id36567">
-                <td>Fan</td>
-                <td>Jun</td>
-                <td>Popular Music Institute</td>
-                <td>80</td>
-                <td>    
-                  <button type="button" class="layui-btn">update</button>
-                  <button type="button" class="layui-btn">delete</button>
-                </td>
-            </tr>
-              </tbody>
-        </table>
 
-    </main>
+    <div class="theme">Classic Music Theory</div>
+    <table class="layui-table layui-form">
+      <thead>
+        <tr>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Class</th>
+          <th>Grade</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <!-- <tbody>
+        <tr class="id36567">
+          <td>Fan</td>
+          <td>Jun</td>
+          <td>Popular Music Institute</td>
+          <td>80</td>
+          <td>
+            <button type="button" class="layui-btn">update</button>
+            <button type="button" class="layui-btn">delete</button>
+          </td>
+        </tr>
+        <tr class="id36567">
+          <td>Fan</td>
+          <td>Jun</td>
+          <td>Popular Music Institute</td>
+          <td>80</td>
+          <td>
+            <button type="button" class="layui-btn">update</button>
+            <button type="button" class="layui-btn">delete</button>
+          </td>
+        </tr>
+      </tbody> -->
+
+      <tbody id="container">
+
+      </tbody>
+    </table>
+
+  </main>
 
 
-      <div class="add-button" id="sell-something-button"><i class="fa fa-plus"></i>
+  <div class="add-button" id="sell-something-button">
+    <i class="fa fa-plus"></i>
 
-        <p>add new</p>
+    <p>add new</p>
+  </div>
+
+
+  <div id="modal-backdrop" class="hidden"></div>
+  <div id="sell-something-modal" class="hidden">
+    <div class="modal-dialog">
+
+      <div class="modal-header">
+        <h3>Add New Students</h3>
+        <button type="button" id="modal-close" class="modal-hide-button">&times;</button>
       </div>
 
+      <div class="modal-body">
 
-    <div id="modal-backdrop" class="hidden"></div>
-    <div id="sell-something-modal" class="hidden">
-      <div class="modal-dialog">
-
-        <div class="modal-header">
-          <h3>Add New Students</h3>
-          <button type="button" id="modal-close" class="modal-hide-button">&times;</button>
+        <div class="post-input-element">
+          <label for="post-text-input">Student name</label>
+          <input type="text" id="post-text-input"></input>
         </div>
 
-        <div class="modal-body">
+        <div class="post-input-element">
+          <label for="post-photo-input">Photo URL</label>
+          <input type="text" id="post-photo-input">
+        </div>
 
-          <div class="post-input-element">
-            <label for="post-text-input">Student name</label>
-            <input type="text" id="post-text-input"></input>
-          </div>
-
-          <div class="post-input-element">
-            <label for="post-photo-input">Photo URL</label>
-            <input type="text" id="post-photo-input">
-          </div>
-
-          <div class="post-input-element">
-            <label for="post-time-input">Grade Record</label>
+        <div class="post-input-element">
+          <label for="post-time-input">Grade Record</label>
           <input type="text" id="post-time-input">
-          </div>
-  <div class="post-input-element">
-            <label for="post-time-input2">guitar or piano</label>
-            <select id="post-time-input2" style="width:200px">
-         
-            <option value="AC"  selected ="selected" >piano</option>
+        </div>
+        <div class="post-input-element">
+          <label for="post-time-input2">guitar or piano</label>
+          <select id="post-time-input2" style="width:200px">
+
+            <option value="AC" selected="selected">piano</option>
             <option value="BC">guitar</option>
-            </select>
+          </select>
           <!--  <input type="text" id="post-time-input">-->
-          </div>
         </div>
-
-        <div class="modal-footer">
-          <button type="button" id="modal-cancel" class="modal-hide-button action-button">Cancel</button>
-          <button type="button" id="modal-accept" class="action-button">Add new students</button>
-        </div>
-
       </div>
-    </div>      
+
+      <div class="modal-footer">
+        <button type="button" id="modal-cancel" class="modal-hide-button action-button">Cancel</button>
+        <button type="button" id="modal-accept" class="action-button">Add new students</button>
+      </div>
+
+    </div>
+  </div>
 </body>
+
 </html>
