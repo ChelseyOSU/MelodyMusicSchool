@@ -39,7 +39,6 @@
         },
 				success:function(data){
           if(data.code == 200){
-            
             getGradeReport(101);
             getGradeReport(228);
             getGradeReport(401);
@@ -72,10 +71,13 @@
           });
 
           if (classId == 101) {
+            $("#container").html("");
             $("#container").append($(dom));
           } else if (classId == 228) {
+            $("#container2").html("");
             $("#container2").append($(dom));
           } else if (classId == 401) {
+            $("#container3").html("");
             $("#container3").append($(dom));
           }
 
